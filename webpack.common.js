@@ -14,26 +14,29 @@ module.exports = {
         font: './assets/js/theme/common/font.js',
         polyfills: './assets/js/polyfills.js',
         polyfill_form_data: ['formdata-polyfill'],
+        supplier_portal: './assets/js/theme/custom/supplier-portal/index.jsx',
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 include: /(assets\/js|assets\\js|stencil-utils)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
                         plugins: [
-                            '@babel/plugin-syntax-dynamic-import', // add support for dynamic imports (used in app.js)
-                            'lodash', // Tree-shake lodash
+                            '@babel/plugin-syntax-dynamic-import',
+                            'lodash',
+                            '@babel/plugin-transform-object-assign'
                         ],
                         presets: [
                             ['@babel/preset-env', {
-                                loose: true, // Enable "loose" transformations for any plugins in this preset that allow them
-                                modules: false, // Don't transform modules; needed for tree-shaking
+                                loose: true,
+                                modules: false,
                                 useBuiltIns: 'entry',
                                 corejs: '^3.6.5',
                             }],
+                            '@babel/preset-react'
                         ],
                     },
                 },
@@ -75,6 +78,7 @@ module.exports = {
         }),
     ],
     resolve: {
+        extensions: ['.js', '.jsx'],
         fallback:  { "url": require.resolve("url/") },
         alias: {
             jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js'),
