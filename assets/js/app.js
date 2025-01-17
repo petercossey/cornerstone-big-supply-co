@@ -49,10 +49,12 @@ const pageClasses = {
     sitemap: noop,
     newsletter_subscribe: noop,
     wishlist: () => import('./theme/wishlist'),
-    wishlists: () => import('./theme/wishlist'),
+    wishlists: () => import('./theme/wishlist')
 };
 
-const customClasses = {};
+const customClasses = {
+    'pages/custom/page/supplier-portal': () => import('./theme/custom/supplier-portal')
+};
 
 /**
  * This function gets added to the global window and then called
